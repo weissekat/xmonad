@@ -9,5 +9,5 @@ main = do
 		} `additionalKeys` 
 		[
 			-- change keyboard layout --
-			((controlMask, xK_Shift_L), spawn "/home/v1vec/.xmonad/keyboard-switch.sh") 
+			((controlMask, xK_Shift_L), spawn "~/.xmonad/keyboard-switch.sh") 
 		]
