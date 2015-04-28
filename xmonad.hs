@@ -4,19 +4,19 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys,removeKeys)
 
 voWorkspaces :: [String]
-voWorkspaces = ["1:dev","2:web","3:msg","4:music"] ++ map show [5..9]
+voWorkspaces = ["","2:dev","3:msg","4:music"] ++ map show [5..9]
 
 voManageHook :: ManageHook
 voManageHook = composeAll . concat $
 	[
 		[manageDocks]
-		, [ className =? c --> doShift "1:dev" | c <- voDevClass ]
-		, [ className =? c --> doShift "2:web" | c <- voWebClass ]
+		, [ className =? c --> doShift "1:web" | c <- voWebClass ]
+		, [ className =? c --> doShift "2:dev" | c <- voDevClass ]
 		, [ className =? c --> doShift "3:msg" | c <- voMsgClass ]
 		, [ className =? c --> doShift "4:music" | c <- voMusClass ]
    	] where
-		voDevClass = ["Geany", "Xfce4-terminal"]
 		voWebClass = ["Google-chrome", "Firefox"]
+		voDevClass = ["Geany", "Xfce4-terminal", "Gnome-terminal"]
 		voMsgClass = ["Skype", "Pidgin"]
 		voMusClass = ["Audacious", "Rhythmbox"]
 
