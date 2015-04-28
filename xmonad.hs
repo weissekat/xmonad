@@ -4,7 +4,7 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys,removeKeys)
 
 voWorkspaces :: [String]
-voWorkspaces = ["","2:dev","3:msg","4:music"] ++ map show [5..9]
+voWorkspaces = ["1:web","2:dev","3:msg","4:music"] ++ map show [5..9]
 
 voManageHook :: ManageHook
 voManageHook = composeAll . concat $
