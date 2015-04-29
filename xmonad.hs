@@ -1,7 +1,9 @@
 import XMonad
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys,removeKeys)
+import System.IO
 
 voWorkspaces :: [String]
 voWorkspaces = ["1:dev","2:web","3:msg","4:music"] ++ map show [5..9]
@@ -21,6 +23,9 @@ voManageHook = composeAll . concat $
 		voMusClass = ["Audacious", "Rhythmbox"]
 
 main = do
+	-- spawn xmobar pipe
+	xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
+	
 	xmonad $ defaultConfig { 
 			-- WIN-key as modkey
 			modMask = mod4Mask
@@ -35,6 +40,14 @@ main = do
 			
 			-- manage predefined hooks
 			, manageHook = voManageHook
+			
+			-- add xmobar borders that windows SHALL NOT PASS
+			, layoutHook = avoidStruts  $  layoutHook defaultConfig
+			
+			-- add xmobar pipe with workspace/tiling name
+			, logHook =  dynamicLogWithPP $ defaultPP {
+					ppOutput = System.IO.hPutStrLn xmproc
+				} 
 		}
 		`additionalKeys`
 		[
