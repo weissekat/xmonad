@@ -9,7 +9,6 @@ Config {
     commands = [
 		Run StdinReader
 		, Run Com ".xmonad/getvolume.sh" [] "volume" 10
-		, Run Com ".xmonad/getkeyboard.sh" [] "keyboard" 10
 		, Run DynNetwork ["-t", "| net: <fc=green><dev></fc> "] 10
 		, Run Battery [
 				"-t", "bat: <left><acstatus>"
@@ -26,5 +25,5 @@ Config {
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% }{ %keyboard% | %volume% %dynnetwork%| %battery% | %date% "
+    template = "%StdinReader% }{ %volume% %dynnetwork%| %battery% | %date% "
 }

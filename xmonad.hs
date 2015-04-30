@@ -28,14 +28,15 @@ voManageHook = composeAll . concat $
 xpConfig = defaultXPConfig { font = "-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*", position = Bottom, historySize = 0 }
 withPrompt prompt fn = inputPrompt xpConfig prompt ?+ fn
 sudoSpawn command = withPrompt "Password" $ run command
-  where run command password = spawn $ concat ["echo ", password, " | sudo -S ", command]
+	where run command password = spawn $ concat ["echo ", password, " | sudo -S ", command]
 
 main = do
 	-- spawn xmobar pipe
 	xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
-	
-	spawn "xfsettingsd" -- fix for incorrect GTK theme; config: "gtk-theme-config", "xfce4-appearance-settings"
-	
+
+	-- fix for incorrect GTK theme; config: "gtk-theme-config", "xfce4-appearance-settings"
+	spawn "xfsettingsd"
+
 	xmonad $ defaultConfig { 
 			-- WIN-key as modkey
 			modMask = mod4Mask
@@ -61,11 +62,8 @@ main = do
 		}
 		`additionalKeys`
 		[
-			-- change keyboard layout
-			((controlMask, xK_Shift_L), spawn "~/.xmonad/keyboard-switch.sh")
-			
 			-- increase font for "dmenu"; however, dmenu haven't support for lovely antialiased Droid Sans/Monospace
-			, ((mod4Mask, xK_p), spawn "dmenu_run -fn \"-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*\"")
+			((mod4Mask, xK_p), spawn "dmenu_run -fn \"-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*\"")
 			
 			{-|
 			-- volume control / alsa
@@ -96,4 +94,8 @@ main = do
 			-- brightness control for notebook
 			, ("<XF86MonBrightnessUp>", spawn "xbacklight +10")
 			, ("<XF86MonBrightnessDown>", spawn "xbacklight -10")
+		]
+		`removeKeys`
+		[
+			(controlMask, xK_Shift_L)
 		]
