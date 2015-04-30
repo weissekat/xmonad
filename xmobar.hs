@@ -13,9 +13,9 @@ Config {
 		, Run DynNetwork ["-t", "| net: <fc=green><dev></fc> "] 10
 		, Run Battery [
 				"-t", "bat: <left><acstatus>"
-				, "-L", "10",  "-l", "red" -- when battery low 20%
-				,		       "-n", "yellow" -- when battery normal 20..80%
-				, "-H", "80", "-h", "green" -- when battery full 80..100%
+				, "-L", "10",  "-l", "red" -- when battery low 10%
+				,		       "-n", "yellow" -- when battery normal 10..90%
+				, "-H", "90", "-h", "green" -- when battery full 90..100%
 				, "-S", "True" -- show percentage
 				, "--"
 				, "-O", " | <fc=yellow>CHARGE</fc>" -- when AC on and charging
