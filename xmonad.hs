@@ -3,7 +3,8 @@ import XMonad.Prompt
 import XMonad.Prompt.Input
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Hooks.Script
+import XMonad.Util.Run
 import XMonad.Util.EZConfig
 import System.IO
 
@@ -30,13 +31,14 @@ withPrompt prompt fn = inputPrompt xpConfig prompt ?+ fn
 sudoSpawn command = withPrompt "Password" $ run command
 	where run command password = spawn $ concat ["echo ", password, " | sudo -S ", command]
 
+
 main = do
 	-- spawn xmobar pipe
 	xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
 
 	-- fix for incorrect GTK theme; config: "gtk-theme-config", "xfce4-appearance-settings"
 	spawn "xfsettingsd"
-
+	
 	xmonad $ defaultConfig { 
 			-- WIN-key as modkey
 			modMask = mod4Mask
@@ -59,6 +61,9 @@ main = do
 			, logHook =  dynamicLogWithPP $ defaultPP {
 					ppOutput = System.IO.hPutStrLn xmproc
 				} 
+
+			-- run xkb config on startup
+			, startupHook = spawn "~/.xmonad/initkey.sh"
 		}
 		`additionalKeys`
 		[
