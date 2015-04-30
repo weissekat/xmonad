@@ -76,8 +76,8 @@ main = do
 			
 			-- volume control / pulseaudio
 			, ((mod4Mask , xK_F7), spawn "pactl set-sink-mute 0 toggle")
-			, ((mod4Mask , xK_F8), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -- -5%") 
-			, ((mod4Mask , xK_F9), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
+			, ((mod4Mask , xK_F8), spawn ".xmonad/decvolume.sh") 
+			, ((mod4Mask , xK_F9), spawn ".xmonad/incvolume.sh")
 
 			-- suspend mode with balls
 			, ((mod4Mask , xK_F1), sudoSpawn "pm-suspend")
@@ -87,8 +87,8 @@ main = do
 		[
 			-- volume control / pulseaudio for notebook
 			("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
-			, ("<XF86AudioLowerVolume>", spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -- -5%") 
-			, ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
+			, ("<XF86AudioLowerVolume>", spawn ".xmonad/decvolume.sh") 
+			, ("<XF86AudioRaiseVolume>", spawn ".xmonad/incvolume.sh")
 			
 			-- suspend mode with balls for notebook
 			, ("<XF86Sleep>", sudoSpawn "pm-suspend")
