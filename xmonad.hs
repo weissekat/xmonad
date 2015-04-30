@@ -4,7 +4,7 @@ import XMonad.Prompt.Input
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys,removeKeys)
+import XMonad.Util.EZConfig
 import System.IO
 
 voWorkspaces :: [String]
@@ -78,8 +78,22 @@ main = do
 			, ((mod4Mask , xK_F7), spawn "pactl set-sink-mute 0 toggle")
 			, ((mod4Mask , xK_F8), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -- -5%") 
 			, ((mod4Mask , xK_F9), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
-			
+
 			-- suspend mode with balls
 			, ((mod4Mask , xK_F1), sudoSpawn "pm-suspend")
 			
+		]
+		`additionalKeysP`
+		[
+			-- volume control / pulseaudio for notebook
+			("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
+			, ("<XF86AudioLowerVolume>", spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -- -5%") 
+			, ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
+			
+			-- suspend mode with balls for notebook
+			, ("<XF86Sleep>", sudoSpawn "pm-suspend")
+			
+			-- brightness control for notebook
+			--, ("<XF86MonBrightnessUp>", spawn "")
+			--, ("<XF86MonBrightnessDown>", spawn "")
 		]
