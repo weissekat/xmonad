@@ -94,6 +94,6 @@ main = do
 			, ("<XF86Sleep>", sudoSpawn "pm-suspend")
 			
 			-- brightness control for notebook
-			--, ("<XF86MonBrightnessUp>", spawn "")
-			--, ("<XF86MonBrightnessDown>", spawn "")
+			, ("<XF86MonBrightnessUp>", spawn "xbacklight +10")
+			, ("<XF86MonBrightnessDown>", spawn "xbacklight -10")
 		]
