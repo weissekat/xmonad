@@ -1,5 +1,5 @@
 Config { 
-    font = "xft:Droid Sans Mono:size=10:bold:antialias=true"
+    font = "xft:Droid Sans Mono:size=12:bold:antialias=true"
     position = Top,
 	lowerOnStart = True,
     hideOnStart = False,

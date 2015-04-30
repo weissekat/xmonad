@@ -18,13 +18,15 @@ voManageHook = composeAll . concat $
 		, [ className =? c --> doShift "4:music" | c <- voMusClass ]
    	] where
 		voWebClass = ["Google-chrome", "Firefox"]
-		voDevClass = ["Geany", "Xfce4-terminal", "Gnome-terminal"]
+		voDevClass = ["Geany"] -- terminal must start on any screen/workspace; removed entries: "Xfce4-terminal", "Gnome-terminal"
 		voMsgClass = ["Skype", "Pidgin"]
 		voMusClass = ["Audacious", "Rhythmbox"]
 
 main = do
 	-- spawn xmobar pipe
 	xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
+	
+	spawn "xfsettingsd" -- fix for incorrect GTK theme; config: "gtk-theme-config", "xfce4-appearance-settings"
 	
 	xmonad $ defaultConfig { 
 			-- WIN-key as modkey
@@ -52,5 +54,8 @@ main = do
 		`additionalKeys`
 		[
 			-- change keyboard layout
-			((controlMask, xK_Shift_L), spawn "~/.xmonad/keyboard-switch.sh") 
+			((controlMask, xK_Shift_L), spawn "~/.xmonad/keyboard-switch.sh")
+			
+			-- increase font for "dmenu"; however, dmenu haven't support for lovely antialiased Droid Sans/Monospace
+			, ((mod4Mask, xK_p), spawn "dmenu_run -fn \"-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*\"")
 		]
