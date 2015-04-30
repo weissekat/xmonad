@@ -71,5 +71,7 @@ main = do
 			, ((mod4Mask , xK_F8), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -- -5%") 
 			, ((mod4Mask , xK_F9), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
 			
+			-- suspend mode
+			, ((mod4Mask , xK_F1), spawn "pm-suspend")
 			
 		]
