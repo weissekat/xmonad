@@ -10,11 +10,11 @@ Config {
 		Run StdinReader
 		, Run MultiCpu ["-t", "cpu: <autototal>"] 10
 		, Run Memory ["-t", "free: <free>/<total>M"] 10
-		, Run Swap ["-t", "swap: <used>/<total>M"] 10
+		, Run Battery ["-t", "ac: <acstatus> | bat: <left>%"] 10
 		, Run DynNetwork [] 10
 		, Run Date "%Y.%m.%d %H:%M:%S" "date" 10
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% }{ %multicpu% | %memory% | %swap% | %dynnetwork% | %date% "
+    template = "%StdinReader% }{ %multicpu% | %memory% | %battery% | %dynnetwork% | %date% "
 }
