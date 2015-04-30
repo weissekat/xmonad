@@ -1,4 +1,6 @@
 import XMonad
+import XMonad.Prompt
+import XMonad.Prompt.Input
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Util.Run(spawnPipe)
@@ -21,6 +23,12 @@ voManageHook = composeAll . concat $
 		voDevClass = ["Geany"] -- terminal must start on any screen/workspace; removed entries: "Xfce4-terminal", "Gnome-terminal"
 		voMsgClass = ["Skype", "Pidgin"]
 		voMusClass = ["Audacious", "Rhythmbox"]
+
+-- spawn with balls; warning, you password shows on screen and may be saved if historySize > 0
+xpConfig = defaultXPConfig { font = "-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*", position = Bottom, historySize = 0 }
+withPrompt prompt fn = inputPrompt xpConfig prompt ?+ fn
+sudoSpawn command = withPrompt "Password" $ run command
+  where run command password = spawn $ concat ["echo ", password, " | sudo -S ", command]
 
 main = do
 	-- spawn xmobar pipe
@@ -71,7 +79,7 @@ main = do
 			, ((mod4Mask , xK_F8), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -- -5%") 
 			, ((mod4Mask , xK_F9), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
 			
-			-- suspend mode
-			, ((mod4Mask , xK_F1), spawn "pm-suspend")
+			-- suspend mode with balls
+			, ((mod4Mask , xK_F1), sudoSpawn "pm-suspend")
 			
 		]
