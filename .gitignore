@@ -14,3 +14,10 @@ cabal.sandbox.config
 *.prof
 *.aux
 *.hp
+
+.xmobar.hs.swp
+history
+xmonad-x86_64-linux
+xmonad.errors
+xmonad.hs.save
+
