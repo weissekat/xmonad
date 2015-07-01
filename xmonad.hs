@@ -97,7 +97,7 @@ main = do
             , ((mod4Mask , xK_F1), sudoSpawn "pm-suspend")
 
             -- lock screen
-            , ((mod4Mask, xK_l), spawn "slock")
+            , ((mod4Mask .|. shiftMask, xK_l), spawn "slock")
         ]
         `additionalKeysP`
         [
