@@ -81,20 +81,20 @@ main = do
             -- increase font for "dmenu"; however, dmenu haven't support for lovely antialiased Droid Sans/Monospace
             ((mod4Mask, xK_p), spawn "dmenu_run -fn \"-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*\"")
             
-            {-|
+            {-| 
             -- volume control / alsa
             , ((mod4Mask , xK_F7), spawn "amixer set Master off && amixer set Headphone off")
             , ((mod4Mask , xK_F8), spawn "amixer set Master on && amixer set Headphone on && amixer set Master 2-") 
             , ((mod4Mask , xK_F9), spawn "amixer set Master on && amixer set Headphone on && amixer set Master 2+")
             -}
-            
+
             -- volume control / pulseaudio
-            , ((mod4Mask , xK_F7), spawn "pactl set-sink-mute 0 toggle")
+            , ((mod4Mask , xK_F7), spawn "pactl set-sink-mute 1 toggle")
             , ((mod4Mask , xK_F8), spawn ".xmonad/decvolume.sh") 
             , ((mod4Mask , xK_F9), spawn ".xmonad/incvolume.sh")
 
             -- suspend mode with balls
-            , ((mod4Mask , xK_F1), sudoSpawn "pm-suspend")
+            --, ((mod4Mask , xK_F1), sudoSpawn "pm-suspend")
 
             -- lock screen
             , ((mod4Mask .|. shiftMask, xK_l), spawn "slock")

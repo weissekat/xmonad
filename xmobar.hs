@@ -8,11 +8,11 @@ Config {
     persistent = True
     commands = [
 		Run StdinReader
-		, Run Memory ["-t", "free: <free>/<total>M"] 10
+		, Run Memory ["-t", "<free>/<total>M"] 10
 		, Run Com ".xmonad/getvolume.sh" [] "volume" 10
-		, Run DynNetwork ["-t", "| net: <fc=green><dev></fc> "] 10
+		, Run DynNetwork ["-t", "| <fc=green><dev></fc> "] 10
 		, Run Battery [
-				"-t", "bat: <left><acstatus>"
+				"-t", "<left><acstatus>"
 				, "-L", "10",  "-l", "red" -- when battery low 10%
 				,		       "-n", "yellow" -- when battery normal 10..90%
 				, "-H", "90", "-h", "green" -- when battery full 90..100%
