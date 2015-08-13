@@ -8,7 +8,7 @@ Config {
     persistent = True
     commands = [
 		Run StdinReader
-		, Run Memory ["-t", "free: <free>/<total>M"] 10
+		, Run Memory ["-t", "free: <buffer>/<total>M"] 10 --fuck it, its free nor buffer!
 		, Run Com ".xmonad/getvolume.sh" [] "volume" 10
 		, Run DynNetwork ["-t", "| net: <fc=green><dev></fc> "] 10
 		, Run Date "%Y.%m.%d %H:%M" "date" 10
