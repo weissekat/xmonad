@@ -48,6 +48,7 @@ main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
 
     -- fix for incorrect GTK theme; config: "gtk-theme-config", "xfce4-appearance-settings"
+    -- ubuntu: apt-get install gtk-theme-config gtk-theme-switch
     spawn "xfsettingsd"
     
     xmonad $ defaultConfig { 
