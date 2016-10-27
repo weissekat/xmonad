@@ -97,7 +97,7 @@ main = do
             -}
 
             -- volume control / pulseaudio
-            , ((mod4Mask , xK_F7), spawn "pactl set-sink-mute 0 toggle")
+            , ((mod4Mask , xK_F7), spawn ".xmonad/mutvolume.sh")
             , ((mod4Mask , xK_F8), spawn ".xmonad/decvolume.sh")
             , ((mod4Mask , xK_F9), spawn ".xmonad/incvolume.sh")
 
