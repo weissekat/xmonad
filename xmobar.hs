@@ -1,5 +1,5 @@
 Config { 
-    font = "xft:Droid Sans Mono:size=12:bold:antialias=true"
+    font = "xft:Noto Mono:size=12:bold:antialias=true"
     position = Top,
 	lowerOnStart = True,
     hideOnStart = False,
@@ -9,8 +9,8 @@ Config {
     commands = [
 		Run StdinReader
 		, Run Memory ["-t", "free: <free>/<total>M"] 10
-		, Run Com ".xmonad/getvolume.sh" [] "volume" 10
-		, Run DynNetwork ["-t", "| net: <fc=green><dev></fc> "] 10
+		-- , Run Com ".xmonad/getvolume.sh" [] "volume" 10
+		-- , Run DynNetwork ["-t", "net: <fc=green><dev></fc> "] 10
 		, Run Battery [
 				"-t", "bat: <left><acstatus>"
 				, "-L", "10",  "-l", "red" -- when battery low 10%
@@ -26,5 +26,5 @@ Config {
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% }{ %memory% | %volume% %dynnetwork%| %battery% | %date% "
+    template = "%StdinReader% }{ %memory% | %battery% | %date% "
 }

@@ -49,12 +49,12 @@ sudoSpawn command = withPrompt "Password" $ run command
     where run command password = spawn $ concat ["echo ", password, " | sudo -S ", command]
 
 main = do
-    -- spawn xmobar pipe
-    xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
-
     -- fix for incorrect GTK theme; config: "gtk-theme-config", "xfce4-appearance-settings"
     -- ubuntu: apt-get install gtk-theme-config gtk-theme-switch
     spawn "xfsettingsd"
+
+    -- spawn xmobar pipe
+    xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
 
     xmonad $ defaultConfig {
             -- WIN-key as modkey
@@ -67,6 +67,9 @@ main = do
 
             -- define workspaces
             , workspaces = voWorkspaces
+
+            -- event handling for Xmobar
+            , handleEventHook = handleEventHook defaultConfig <+> docksEventHook
 
             -- manage predefined hooks
             , manageHook = voManageHook
@@ -84,7 +87,7 @@ main = do
         `additionalKeys`
         [
             -- increase font for "dmenu"; however, dmenu haven't support for lovely antialiased Droid Sans/Monospace
-            ((mod4Mask, xK_p), spawn "dmenu_run -fn \"-misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*\"")
+            ((mod4Mask, xK_p), spawn "dmenu_run -fn \"-misc-fixed-*-*-*-*-17-*-*-*-*-*-*-*\"")
 
             {-|
             -- volume control / alsa
@@ -94,29 +97,29 @@ main = do
             -}
 
             -- volume control / pulseaudio
-            , ((mod4Mask , xK_F7), spawn "pactl set-sink-mute 0 toggle")
-            , ((mod4Mask , xK_F8), spawn ".xmonad/decvolume.sh")
-            , ((mod4Mask , xK_F9), spawn ".xmonad/incvolume.sh")
+            -- , ((mod4Mask , xK_F7), spawn "pactl set-sink-mute 0 toggle")
+            -- , ((mod4Mask , xK_F8), spawn ".xmonad/decvolume.sh")
+            -- , ((mod4Mask , xK_F9), spawn ".xmonad/incvolume.sh")
 
             -- suspend mode with balls
-            , ((mod4Mask , xK_F1), sudoSpawn "pm-suspend")
+            -- , ((mod4Mask , xK_F1), sudoSpawn "pm-suspend")
 
             -- lock screen
-            , ((mod4Mask .|. shiftMask, xK_l), spawn "slock")
+            -- , ((mod4Mask .|. shiftMask, xK_l), spawn "slock")
         ]
         `additionalKeysP`
         [
             -- volume control / pulseaudio for notebook
-            ("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
-            , ("<XF86AudioLowerVolume>", spawn ".xmonad/decvolume.sh")
-            , ("<XF86AudioRaiseVolume>", spawn ".xmonad/incvolume.sh")
+            -- ("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
+            -- , ("<XF86AudioLowerVolume>", spawn ".xmonad/decvolume.sh")
+            -- , ("<XF86AudioRaiseVolume>", spawn ".xmonad/incvolume.sh")
 
             -- suspend mode with balls for notebook
-            , ("<XF86Sleep>", sudoSpawn "pm-suspend")
+            -- , ("<XF86Sleep>", sudoSpawn "pm-suspend")
 
             -- brightness control for notebook
-            , ("<XF86MonBrightnessUp>", spawn "xbacklight +10")
-            , ("<XF86MonBrightnessDown>", spawn "xbacklight -10")
+            -- , ("<XF86MonBrightnessUp>", spawn "xbacklight +10")
+            -- , ("<XF86MonBrightnessDown>", spawn "xbacklight -10")
         ]
         `removeKeys`
         [
